@@ -16,6 +16,17 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   // For internal Docker communication, use the service name
   // For external access, use the HOST from environment
   const isDocker = process.env.DOCKER_ENV === 'true' || !!process.env.HOSTNAME;
+
+  // Docker Swarm uses {stack-name}_{service-name} format
+  const stackName = process.env.STACK_NAME || 'archon-test';
+  const internalHost = isDocker ? `${stackName}_archon-server` : 'archon-server';
+  const externalHost = process.env.HOST || 'localhost';
+  const host = isDocker ? internalHost : externalHost;
+
+  // Use internal port for Docker Swarm communication
+  const port = isDocker
+    ? (process.env.ARCHON_SERVER_INTERNAL_PORT || "8181")
+    : (process.env.VITE_ARCHON_SERVER_EXTERNAL_PORT || "8181");
   const internalHost = 'archon-server';  // Docker service name for internal communication
   const externalHost = process.env.HOST || 'localhost';  // Host for external access
   const host = isDocker ? internalHost : externalHost;

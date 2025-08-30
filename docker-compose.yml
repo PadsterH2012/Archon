@@ -9,7 +9,7 @@ services:
         ARCHON_SERVER_PORT: ${ARCHON_SERVER_PORT:-8181}
     container_name: Archon-Server
     ports:
-      - "${ARCHON_SERVER_PORT:-8181}:${ARCHON_SERVER_PORT:-8181}"
+      - "${ARCHON_SERVER_EXTERNAL_PORT:-8181}:${ARCHON_SERVER_INTERNAL_PORT:-8181}"
     environment:
       - SUPABASE_URL=${SUPABASE_URL}
       - SUPABASE_SERVICE_KEY=${SUPABASE_SERVICE_KEY}
@@ -44,7 +44,7 @@ services:
         ARCHON_MCP_PORT: ${ARCHON_MCP_PORT:-8051}
     container_name: Archon-MCP
     ports:
-      - "${ARCHON_MCP_PORT:-8051}:${ARCHON_MCP_PORT:-8051}"
+      - "${ARCHON_MCP_EXTERNAL_PORT:-8051}:${ARCHON_MCP_INTERNAL_PORT:-8051}"
     environment:
       - SUPABASE_URL=${SUPABASE_URL}
       - SUPABASE_SERVICE_KEY=${SUPABASE_SERVICE_KEY}
@@ -80,7 +80,7 @@ services:
         ARCHON_AGENTS_PORT: ${ARCHON_AGENTS_PORT:-8052}
     container_name: Archon-Agents
     ports:
-      - "${ARCHON_AGENTS_PORT:-8052}:${ARCHON_AGENTS_PORT:-8052}"
+      - "${ARCHON_AGENTS_EXTERNAL_PORT:-8052}:${ARCHON_AGENTS_INTERNAL_PORT:-8052}"
     environment:
       - SUPABASE_URL=${SUPABASE_URL}
       - SUPABASE_SERVICE_KEY=${SUPABASE_SERVICE_KEY}
